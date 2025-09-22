@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Hover Gallery</title>
+    <style>
+      body {
+        background-color: rgb(56, 42, 42);
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .list {
+        display: flex;
+        gap: 10px;
+        transform-style: preserve-3d;
+        transform: perspective(1000px);
+      }
+      .item {
+        transition: 0.5s;
+        filter: brightness(0);
+      }
+      .item img {
+        display: block;
+        width: 200px;
+        height: 80%;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Hovered item */
+      .item:hover {
+        filter: brightness(1);
+        transform: translateZ(200px);
+        z-index: 10;
+      }
+
+      /* Next sibling */
+      .item:hover + .item {
+        filter: brightness(0.8);
+        transform: translateZ(100px) rotateY(20deg);
+      }
+
+      /* Second next sibling */
+      .item:hover + .item + .item {
+        filter: brightness(0.6);
+        transform: translateZ(50px) rotateY(40deg);
+      }
+
+      /* Previous sibling */
+      .item:has(+ .item:hover) {
+        filter: brightness(0.8);
+        transform: translateZ(100px) rotateY(-20deg);
+      }
+
+      /* Second previous sibling */
+      .item:has(+ .item + .item:hover) {
+        filter: brightness(0.6);
+        transform: translateZ(50px) rotateY(-40deg);
+      }
+      /* Tablets (iPad, <= 1024px) */
+      @media (max-width: 1024px) {
+        .item img {
+          width: 150px; /* smaller */
+        }
+      }
+
+      /* Phones (<= 600px) */
+      @media (max-width: 600px) {
+        .list {
+          gap: 5px;
+        }
+        .item img {
+          width: 100px; /* even smaller */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="list">
+      <div class="item">
+        <img src="5bbbf778d5dcaf8265363b2c1a6fbe25.jpg" alt="" />
+      </div>
+      <div class="item">
+        <img src="6a5899d3ce033486cc1d0fdef60f8265.jpg" alt="" />
+      </div>
+      <div class="item">
+        <img src="9ace8d4c361924142b7666c28279d46f.jpg" alt="" />
+      </div>
+      <div class="item">
+        <img src="157c97a77d55e39ef9069ca25e64b295.jpg" alt="" />
+      </div>
+      <div class="item">
+        <img src="28112f46e3350155a605a6bdfee45b37.jpg" alt="" />
+      </div>
+      <div class="item">
+        <img src="240596_adapted_720x1560_1708319835.png" alt="" />
+      </div>
+    </div>
+  </body>
+</html>
